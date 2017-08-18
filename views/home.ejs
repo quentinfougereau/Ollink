@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <% include ./partials/head %>
+    <title>Index</title>
+</head>
+<body>
+    <% include ./partials/header %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="/link" method="POST">
+                     <div class="form-group">
+                        <label for="link">Lien</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="link" placeholder="Lien" name="link"/>
+                            <span class="input-group-btn">
+                                <input type="submit" class="btn btn-primary" value="Ajouter un lien"/>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>URL</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% links.forEach(function(link) { %>
+                            <tr>
+                                <td><%= link.id %></td>
+                                <td><a href="<%= link.url %>" target="_blank"><%= link.url %></a></td>
+                                <td><button class="btn btn-danger pull-right delete-link" value="<%= link.id %>"><span class="glyphicon glyphicon-remove"></span></button></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <% include ./partials/footer %>
+    <script type="text/javascript" src="/public/js/home.js"></script>
+</body>
+</html>

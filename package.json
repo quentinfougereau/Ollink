@@ -1,0 +1,23 @@
+{
+  "name": "ollink",
+  "version": "1.0.0",
+  "description": "links manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "mysql": "^2.14.1",
+    "mysql2": "^1.4.1",
+    "nodeadmin": "^0.1.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "sequelize": "^4.5.0"
+  }
+}
