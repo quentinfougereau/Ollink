@@ -4,7 +4,7 @@ module.exports = function(app, models) {
 
 	app.post('/link', function(req, res) {
 		var link = req.body.link;
-		Link.create({ url: link }).then(link => {
+		Link.create({ url: link, user_id: req.user.id }).then(link => {
 			res.redirect('/home');
 		});
 	});

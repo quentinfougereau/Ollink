@@ -33,13 +33,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% links.forEach(function(link) { %>
-                            <tr>
-                                <td><%= link.id %></td>
-                                <td><a href="<%= link.url %>" target="_blank"><%= link.url %></a></td>
-                                <td><button class="btn btn-danger pull-right delete-link" value="<%= link.id %>"><span class="glyphicon glyphicon-remove"></span></button></td>
-                            </tr>
-                        <% }); %>
+                        <% if (links.length > 0) { %>
+                            <% links.forEach(function(link) { %>
+                                <tr>
+                                    <td><%= link.id %></td>
+                                    <td><a href="<%= link.url %>" target="_blank"><%= link.url %></a></td>
+                                    <td><button class="btn btn-danger pull-right delete-link" value="<%= link.id %>"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                </tr>
+                            <% }); %>
+                        <% } %>
                     </tbody>
                 </table>
             </div>

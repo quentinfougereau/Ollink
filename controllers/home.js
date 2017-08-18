@@ -1,10 +1,11 @@
 module.exports = function(app, models) {
 
 	Link = models.Link;
+	User = models.User;
 
 	app.get('/home', function(req, res) {
 		if (req.user) {
-			Link.findAll().then(links => {
+			var links = req.user.getLinks().then(links => {
 				res.render('home.ejs', { links: links });
 			});
 		} else {
