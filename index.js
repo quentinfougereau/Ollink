@@ -63,6 +63,7 @@ require("./controllers/login")(app, passport);
 require("./controllers/register")(app, models);
 require("./controllers/home")(app, models);
 require("./controllers/link")(app, models);
+require("./controllers/category")(app, models);
 
 app.listen(8888, function() {
     console.log("Server started port 8888...");

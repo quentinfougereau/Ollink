@@ -7,21 +7,73 @@
 <body>
     <% include ./partials/header %>
     <div class="container">
+
         <div class="row">
-            <div class="col-md-12">
-                <form action="/link" method="POST">
+            <div class="col-md-3">
+                <form action="/category" method="POST">
                      <div class="form-group">
-                        <label for="link">Lien</label>
+                        <label for="category">Catégorie</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="link" placeholder="Lien" name="link"/>
+                            <input type="text" class="form-control" id="category" placeholder="Catégorie" name="category"/>
                             <span class="input-group-btn">
-                                <input type="submit" class="btn btn-primary" value="Ajouter un lien"/>
+                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
                             </span>
                         </div>
                     </div>
                 </form>
             </div>
+            <div class="col-md-9">
+                <form action="/link" method="POST">
+                     <div class="form-group">
+                        <label for="link">Lien</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="link" placeholder="Lien" name="link"/>
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-warning" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span id="text-dropdown-link-category">Catégorie</span>&nbsp;<span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-link-category" data-id="-1"><a href="#">Aucune</a></li>
+                                    <% if (categories.length > 0) { %>
+                                        <% categories.forEach(function(category) { %>
+                                            <li class="dropdown-link-category" data-id="<%= category.id %>" data-name="<%= category.name %>"><a href="#"><%= category.name %></a></li>
+                                        <% }); %>
+                                    <% } %>
+                                </ul>
+                                <input type="submit" class="btn btn-primary" value="Ajouter un lien"/>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="input-hidden-link-category" name="link_category_id" value="">
+                </form>
+            </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Catégorie</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (categories.length > 0) { %>
+                            <% categories.forEach(function(category) { %>
+                                <tr>
+                                    <td><%= category.id %></td>
+                                    <td><%= category.name %></td>
+                                    <td><button class="btn btn-danger pull-right delete-category" value="<%= category.id %>"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                </tr>
+                            <% }); %>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-hover">

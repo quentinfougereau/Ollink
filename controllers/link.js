@@ -4,9 +4,16 @@ module.exports = function(app, models) {
 
 	app.post('/link', function(req, res) {
 		var link = req.body.link;
-		Link.create({ url: link, user_id: req.user.id }).then(link => {
-			res.redirect('/home');
-		});
+		if (req.body.link_category_id == "") {
+			Link.create({ url: link,  user_id: req.user.id }).then(link => {
+				res.redirect('/home');
+			});
+		} else {
+			var category_id = req.body.link_category_id;
+			Link.create({ url: link,  user_id: req.user.id, category_id: category_id }).then(link => {
+				res.redirect('/home');
+			});
+		}
 	});
 
 	app.delete('/link/:id', function(req, res) {
