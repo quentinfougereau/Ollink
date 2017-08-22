@@ -54,4 +54,11 @@ $("document").ready(function() {
 		}
 	});
 
+	/*
+	$(".change-category").on("submit", function(e) {
+		console.log($(this).serialize());
+		return false;
+	});
+	*/
+
 });

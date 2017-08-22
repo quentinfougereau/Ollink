@@ -9,11 +9,14 @@ module.exports = sequelize.import("Category", function(sequelize, Datatypes) {
 	            autoIncrement: true
 	        },
 	        name: {
-	            type: Datatypes.STRING
+	            type: Datatypes.STRING,
+	            validate: {
+	            	notEmpty: true
+	            }
 	        }
 	    }, 
 	    {
-	        paranoid: true,
+	        paranoid: false,
 	        freezeTableName: true,
 	        underscored: true
     	}

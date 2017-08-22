@@ -9,11 +9,15 @@ module.exports = sequelize.import("Link", function(sequelize, Datatypes) {
 	            autoIncrement: true
 	        },
 	        url: {
-	            type: Datatypes.STRING
+	            type: Datatypes.STRING,
+	            validate: {
+	            	notEmpty: true,
+	            	isUrl: true
+	            }
 	        }
 	    }, 
 	    {
-	        paranoid: true,
+	        paranoid: false,
 	        freezeTableName: true,
 	        underscored: true
     	}

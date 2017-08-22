@@ -6,6 +6,8 @@ module.exports = function(app, models) {
 		var category = req.body.category;
 		Category.create({ name: category, user_id: req.user.id }).then(category => {
 			res.redirect('/home');
+		}).catch(err => {
+			res.redirect('/home');
 		});
 	});
 

@@ -9,20 +9,36 @@
     <div class="container">
 
         <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1 class="text-center">Ollink - Gestionnaire de liens</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">Création</h2>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-3">
+                <h3 class="text-primary">Ajouter une catégorie</h3>
                 <form action="/category" method="POST">
                      <div class="form-group">
                         <label for="category">Catégorie</label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="category" placeholder="Catégorie" name="category"/>
                             <span class="input-group-btn">
-                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
                             </span>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="col-md-9">
+                <h3 class="text-primary">Ajouter un lien</h3>
                 <form action="/link" method="POST">
                      <div class="form-group">
                         <label for="link">Lien</label>
@@ -40,7 +56,7 @@
                                         <% }); %>
                                     <% } %>
                                 </ul>
-                                <input type="submit" class="btn btn-primary" value="Ajouter un lien"/>
+                                <input type="submit" class="btn btn-success" value="Ajouter un lien"/>
                             </div>
                         </div>
                     </div>
@@ -50,7 +66,13 @@
         </div>
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-12">
+                <h2 class="text-center">Mes catégories</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 well">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -64,7 +86,7 @@
                             <% categories.forEach(function(category) { %>
                                 <tr>
                                     <td><%= category.id %></td>
-                                    <td><%= category.name %></td>
+                                    <td><a href="#<%= category.name %>"><%= category.name %></a></td>
                                     <td><button class="btn btn-danger pull-right delete-category" value="<%= category.id %>"><span class="glyphicon glyphicon-remove"></span></button></td>
                                 </tr>
                             <% }); %>
@@ -76,28 +98,114 @@
 
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>URL</th>
-                            <th>&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% if (links.length > 0) { %>
-                            <% links.forEach(function(link) { %>
-                                <tr>
-                                    <td><%= link.id %></td>
-                                    <td><a href="<%= link.url %>" target="_blank"><%= link.url %></a></td>
-                                    <td><button class="btn btn-danger pull-right delete-link" value="<%= link.id %>"><span class="glyphicon glyphicon-remove"></span></button></td>
-                                </tr>
-                            <% }); %>
-                        <% } %>
-                    </tbody>
-                </table>
+                <h2 class="text-center">Mes liens</h2>
             </div>
         </div>
+        
+        <% if (unsorted_links.length > 0) { %>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-primary">Non classé(s)</h3>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>URL</th>
+                                <th>Catégorie</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% unsorted_links.forEach(function(unsorted_link) { %>
+                                <tr>
+                                    <td><%= unsorted_link.id %></td>
+                                    <td><a href="<%= unsorted_link.url %>" target="_blank"><%= unsorted_link.url %></a></td>
+                                    <td>
+                                        <% if (categories.length > 0) { %>
+                                            <form action="/changeCategory" method="POST" class="form-inline">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="select-category">Catégorie</label>
+                                                    <select name="category" class="form-control" id="select-category">
+                                                        <option value="-1" selected="true">Non classé</option>
+                                                        <% categories.forEach(function(category) { %>
+                                                            <option value="<%= category.id %>"><%= category.name %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                </div>
+                                                <input type="hidden" name="link_id" value="<%= unsorted_link.id %>">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-refresh"></span></button>
+                                                </div>
+                                            </form>
+                                        <% } %>
+                                    </td>
+                                    <td><button class="btn btn-danger pull-right delete-link" value="<%= unsorted_link.id %>"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <% } %>
+
+        <% if (categories.length > 0) { %>
+            <% categories.forEach(function(category) { %>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="<%= category.name %>">
+                            <h3 class="text-primary"><%= category.name %></h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>URL</th>
+                                        <th>Catégorie</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if (links.length > 0) { %>
+                                        <% links.forEach(function(link) { %>
+                                            <% if (link.category_id == category.id) { %>
+                                                <tr>
+                                                    <td><%= link.id %></td>
+                                                    <td><a href="<%= link.url %>" target="_blank"><%= link.url %></a></td>
+                                                    <td>
+                                                        <% if (categories.length > 0) { %>
+                                                            <form action="/changeCategory" method="POST" class="form-inline">
+                                                                <div class="form-group">
+                                                                    <label class="sr-only" for="select-category">Catégorie</label>
+                                                                    <select name="category" class="form-control" id="select-category">
+                                                                        <option value="-1">Non classé</option>
+                                                                        <% categories.forEach(function(inner_category) { %>
+                                                                            <% if (category.id == inner_category.id)  { %>
+                                                                                <option value="<%= inner_category.id %>" selected="true"><%= inner_category.name %></option>
+                                                                            <% } else { %>
+                                                                                <option value="<%= inner_category.id %>"><%= inner_category.name %></option>
+                                                                            <% } %>
+                                                                        <% }); %>
+                                                                    </select>
+                                                                </div>
+                                                                <input type="hidden" name="link_id" value="<%= link.id %>">
+                                                                <div class="form-group">
+                                                                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-refresh"></span></button>
+                                                                </div>
+                                                            </form>
+                                                        <% } %>
+                                                    </td>
+                                                    <td><button class="btn btn-danger pull-right delete-link" value="<%= link.id %>"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                                </tr>
+                                            <% } %>
+                                        <% }); %>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>    
+            <% }); %>
+        <% } %>
+
     </div>
     <% include ./partials/footer %>
     <script type="text/javascript" src="/public/js/home.js"></script>

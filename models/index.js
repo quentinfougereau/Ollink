@@ -5,7 +5,7 @@ var Category = require("./Category");
 
 User.hasMany(Link);
 User.hasMany(Category);
-Category.hasMany(Link);
+Category.hasMany(Link, { onDelete: 'SET NULL' });
 
 sequelize.sync();
 

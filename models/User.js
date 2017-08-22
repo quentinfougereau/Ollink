@@ -9,10 +9,18 @@ module.exports = sequelize.import("User", function(sequelize, Datatypes) {
 	            autoIncrement: true
 	        },
 	        email: {
-	            type: Datatypes.STRING
+	            type: Datatypes.STRING,
+	            validate: {
+	            	notEmpty: true,
+	            	isEmail: true
+	            }
 	        },
 	        password: {
-	            type: Datatypes.STRING
+	            type: Datatypes.STRING,
+	            validate: {
+	            	notEmpty: true,
+	            	len: [8, 50]
+	            }
 	        }
 	    }, 
 	    {

@@ -15,6 +15,8 @@ module.exports = function(app, models) {
 	  					}
 	  					res.redirect('/home');
 	  				});
+	  			}).catch(err => {
+	  				res.redirect('/');
 	  			});
 	  		} else {
 	  			console.log("This email already exists");
