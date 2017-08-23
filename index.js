@@ -1,23 +1,13 @@
 var express = require("express");
 var app = express();
-//var nodeadmin = require("nodeadmin");
-/*var mysql = require("mysql");*/
-/*
-var connection = mysql.createConnection({
-	host     : 'localhost',
-	user     : 'root',
-	password : 'root',
-	database : 'ollink'
-});
-*/
 var passport = require("passport");
 var localStrategy = require("passport-local").Strategy;
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var models = require("./models");
 var User = models.User;
+var hash = require("./utils/hash.js");
 
-//app.use(nodeadmin(app));
 //app.use(express.cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ 
@@ -48,7 +38,7 @@ passport.use(new localStrategy({
 			if (!user) {
 				return done(null, false);
 			}
-			if (user.password != password) { 
+			if (hash.saltHashPassword(username, password) != user.password) {
 				return done(null, false);
 			}
 			return done(null, user);
@@ -61,7 +51,7 @@ passport.use(new localStrategy({
 require("./controllers/index")(app);
 require("./controllers/login")(app, passport);
 require("./controllers/logout")(app);
-require("./controllers/register")(app, models);
+require("./controllers/register")(app, models, hash);
 require("./controllers/home")(app, models);
 require("./controllers/link")(app, models);
 require("./controllers/category")(app, models);

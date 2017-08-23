@@ -6,19 +6,27 @@
 </head>
 <body>
     <% include ./partials/header %>
-    <div class="container-fluid">
+    <div class="container">
+
         <div class="row">
-        
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1 class="text-center">Ollink - Gestionnaire de liens</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-6">
                 <h2 class="text-center">Connexion</h2>
                 <form action="/login" method="post">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" id="email" placeholder="Email" name="email"/>
+                        <input type="text" class="form-control" id="email" placeholder="Email" name="email" data-validation="email"/>
                     </div>
                     <div class="form-group">
                         <label for="password">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" placeholder="Mot de passe" name="password"/>
+                        <input type="password" class="form-control" id="password" placeholder="Mot de passe" name="password"  data-validation="length" data-validation-length="min8"/>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-success" value="Se connecter"/>
@@ -31,11 +39,15 @@
                 <form action="/register" method="post">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" id="email" placeholder="Email" name="email"/>
+                        <input type="text" class="form-control" id="email" placeholder="Email" name="email" data-validation="email"/>
                     </div>
                     <div class="form-group">
                         <label for="password">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" placeholder="Mot de passe" name="password"/>
+                        <input type="password" class="form-control" id="password" placeholder="Mot de passe" name="password" data-validation="length" data-validation-length="min8"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmer le mot de passe</label>
+                        <input type="password" class="form-control" id="confirm-password" placeholder="Confirmer le mot de passe" name="confirmPassword" data-validation="confirmation" data-validation-confirm="password"/>
                     </div>
                     <div>
                         <input type="submit" class="btn btn-success" value="S'inscrire"/>
@@ -43,6 +55,7 @@
                 </form>
             </div>
         </div>
+        
     </div>
     <% include ./partials/footer %>
 </body>

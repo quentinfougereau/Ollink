@@ -19,7 +19,7 @@ module.exports = sequelize.import("User", function(sequelize, Datatypes) {
 	            type: Datatypes.STRING,
 	            validate: {
 	            	notEmpty: true,
-	            	len: [8, 50]
+	            	len: [8, 128]
 	            }
 	        }
 	    }, 
