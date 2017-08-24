@@ -56,8 +56,7 @@ require("./controllers/home")(app, models);
 require("./controllers/link")(app, models);
 require("./controllers/category")(app, models);
 
-var serverPort = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 5000;
-var serverIpAddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var serverPort = process.env.PORT || 5000;
  
 app.listen(serverPort, function() {
     console.log("Server started on port " + serverPort);
