@@ -5,7 +5,7 @@ var dbUser = process.env.MYSQL_USER || 'root';
 //var dbPassword = process.env.MYSQL_PASSWORD || 'root';
 var dbPassword = process.env.MYSQL_ROOT_PASSWORD || 'root';
 var dbHost = process.env.MYSQL_SERVICE_HOST || 'localhost';
-var dbPort = process.env.MYSQL_SERVICE_PORT || 3306;
+var dbPort = process.env.MYSQL_PORT || 3306;
 
 module.exports = new sequelize(dbName, dbUser, dbPassword, {
 	host: dbHost,
