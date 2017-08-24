@@ -15,7 +15,7 @@ module.exports = new sequelize(dbName, dbUser, dbPassword, {
 });
 */
 
-module.exports = new sequelize( dbHost {
+module.exports = new sequelize( dbHost, {
 	host: dbHost,
 	dialect: "mysql"
 });
