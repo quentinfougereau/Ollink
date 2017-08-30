@@ -2,6 +2,19 @@ module.exports = function(app, models) {
 
 	var Link = models.Link;
 
+	app.get('/new/*', function(req, res) {
+		var url = req.params[0];
+		if (req.user) {
+			Link.create({ url: url,  user_id: req.user.id }).then(link => {
+				res.redirect('/home');
+			}).catch(err => {
+				res.redirect('/home');
+			});
+		} else {
+			res.redirect('/?url='+url);
+		}
+	});
+
 	app.post('/link', function(req, res) {
 		if (req.user) {
 			var link = req.body.link;
