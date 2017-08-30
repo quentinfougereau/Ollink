@@ -25,7 +25,12 @@ module.exports = function(app, models) {
 						}
 					}).then(unsorted_user_links => {
 						unsorted_links = unsorted_user_links;
-						res.render('home.ejs', { categories: categories, links: links, unsorted_links: unsorted_links });
+						res.render('home.ejs', { 
+							categories: categories, 
+							links: links, 
+							unsorted_links: unsorted_links,
+							user_email: req.user.email
+						});
 					});
 				});
 			});

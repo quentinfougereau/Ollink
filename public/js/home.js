@@ -54,6 +54,11 @@ $("document").ready(function() {
 		}
 	});
 
+	var email = $("#variable-user-email").val();
+	if (email != "") {
+		$("#user-email").html(email);
+	}
+
 	/*
 	$(".change-category").on("submit", function(e) {
 		console.log($(this).serialize());
