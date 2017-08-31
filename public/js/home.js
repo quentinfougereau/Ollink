@@ -46,11 +46,11 @@ $("document").ready(function() {
 		var category_id   = $(this).data("id");
 		var category_name = $(this).data("name");
 		if (parseInt(category_id) != -1) {
-			$("#input-hidden-link-category").val(category_id);
-			$("#text-dropdown-link-category").html(category_name);
+			$(".input-hidden-link-category").val(category_id);
+			$(".text-dropdown-link-category").html(category_name);
 		} else {
-			$("#input-hidden-link-category").val("");
-			$("#text-dropdown-link-category").html("Catégorie");
+			$(".input-hidden-link-category").val("");
+			$(".text-dropdown-link-category").html("Catégorie");
 		}
 	});
 
