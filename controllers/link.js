@@ -5,9 +5,11 @@ module.exports = function(app, models) {
 	app.get('/new/*', function(req, res) {
 		var url = req.params[0];
 		if (req.user) {
+			console.log("URL: " + url );
 			Link.create({ url: url,  user_id: req.user.id }).then(link => {
 				res.redirect('/home');
 			}).catch(err => {
+				console.log("ERROR: " + err );
 				res.redirect('/home');
 			});
 		} else {
